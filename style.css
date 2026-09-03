@@ -1,7 +1,101 @@
-/* Algemene instellingen */
+html,
+body {
+    height: 100%;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #222;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Bovenste balk */
+header {
+    background-color: #222;
+    color: white;
+    padding: 15px 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Titel */
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Navigatie */
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Hoofdinhoud */
+main {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+
+    flex: 1;
+}
+
+/* Secties */
+section {
+    background-color: white;
+    padding: 30px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* Artikelen */
+article {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+article h2 {
+    margin-top: 0;
+}
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 1px;
+}
+
+/* Mobiel */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    main {
+        margin: 20px auto;
+    }
 }
