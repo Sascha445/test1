@@ -16,6 +16,7 @@
             <a href="index.html">Wie ben ik?</a>
             <a href="projecten.html">Projecten</a>
             <a href="blog.html">Blog</a>
+            <a href="weer.html">Weer</a>
         </nav>
     </header>
 
@@ -27,11 +28,38 @@
                 Ik ben Sascha en dit is mijn eerste website. Mijn leerlingnummer is 25016873 en ik zit op de Haagse Hogeschool. Ik ben bezig met de opleiding Software Development en ik vind het leuk om te leren over webdevelopment.
             </p>
         </section>
+
+        <section>
+            <h2>Contact</h2>
+
+            <form id="contactForm">
+                <label for="naam">Naam:</label>
+                <input type="text" id="naam" name="naam" aria-describedby="naamFout">
+
+                <span id="naamFout"></span>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" aria-describedby="emailFout">
+
+                <span id="emailFout"></span>
+
+                <label for="bericht">Bericht:</label>
+                <textarea id="bericht" name="bericht" aria-describedby="berichtFout"></textarea>
+
+                <span id="berichtFout"></span>
+
+                <button type="submit">Versturen</button>
+
+                <p id="succesMelding" aria-live="polite"></p>
+            </form>
+        </section>
     </main>
 
     <footer>
         <p>Sascha Hartman - 25016873</p>
     </footer>
+
+    <script src="script.js"></script>
 
 </body>
 </html>

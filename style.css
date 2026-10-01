@@ -97,3 +97,35 @@ footer {
         padding: 20px;
     }
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+form input,
+form textarea {
+    padding: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+form textarea {
+    min-height: 120px;
+}
+
+form span {
+    color: red;
+    min-height: 20px;
+}
+
+form button {
+    width: fit-content;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+#succesMelding {
+    color: green;
+}
