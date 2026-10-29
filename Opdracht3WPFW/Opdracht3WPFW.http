@@ -1,0 +1,6 @@
+@Opdracht3WPFW_HostAddress = http://localhost:5281
+
+GET {{Opdracht3WPFW_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
