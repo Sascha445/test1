@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Opdracht3WPFW.Data;
-using Opdracht3WPFW.Models;
 using Opdracht3WPFW.DTOs;
+using Opdracht3WPFW.Models;
 
 namespace Opdracht3WPFW.Services;
 
@@ -17,34 +17,13 @@ public class ProjectService
     public async Task<List<ProjectResponseDto>> GetAll()
     {
         var projecten = await _db.Projects.ToListAsync();
-
-        return projecten.Select(p => new ProjectResponseDto
-        {
-            Id = p.Id,
-            Titel = p.Titel,
-            Beschrijving = p.Beschrijving,
-            Categorie = p.Categorie,
-            GitHubUrl = p.GitHubUrl,
-            Datum = p.Datum
-        }).ToList();
+        return projecten.Select(ToDto).ToList();
     }
 
     public async Task<ProjectResponseDto?> GetById(int id)
     {
         var project = await _db.Projects.FindAsync(id);
-
-        if (project == null)
-            return null;
-
-        return new ProjectResponseDto
-        {
-            Id = project.Id,
-            Titel = project.Titel,
-            Beschrijving = project.Beschrijving,
-            Categorie = project.Categorie,
-            GitHubUrl = project.GitHubUrl,
-            Datum = project.Datum
-        };
+        return project == null ? null : ToDto(project);
     }
 
     public async Task<ProjectResponseDto> Create(ProjectCreateDto dto)
@@ -61,7 +40,7 @@ public class ProjectService
         _db.Projects.Add(project);
         await _db.SaveChangesAsync();
 
-        return await GetById(project.Id) ?? throw new Exception("Project niet gevonden.");
+        return ToDto(project);
     }
 
     public async Task<ProjectResponseDto?> Update(int id, ProjectUpdateDto dto)
@@ -79,7 +58,7 @@ public class ProjectService
 
         await _db.SaveChangesAsync();
 
-        return await GetById(id);
+        return ToDto(project);
     }
 
     public async Task<bool> Delete(int id)
@@ -94,4 +73,15 @@ public class ProjectService
 
         return true;
     }
+
+    // Enige plek waar een Project-entiteit naar een DTO wordt omgezet
+    private static ProjectResponseDto ToDto(Project p) => new()
+    {
+        Id = p.Id,
+        Titel = p.Titel,
+        Beschrijving = p.Beschrijving,
+        Categorie = p.Categorie,
+        GitHubUrl = p.GitHubUrl,
+        Datum = p.Datum
+    };
 }
