@@ -47,7 +47,7 @@ public class ProjectService
         };
     }
 
-    public async Task<ProjectResponseDto> Create(ProjectDto dto)
+    public async Task<ProjectResponseDto> Create(ProjectCreateDto dto)
     {
         var project = new Project
         {
@@ -64,7 +64,7 @@ public class ProjectService
         return await GetById(project.Id) ?? throw new Exception("Project niet gevonden.");
     }
 
-    public async Task<ProjectResponseDto?> Update(int id, ProjectDto dto)
+    public async Task<ProjectResponseDto?> Update(int id, ProjectUpdateDto dto)
     {
         var project = await _db.Projects.FindAsync(id);
 

@@ -30,13 +30,13 @@ app.MapGet("/projecten/{id}", async (int id, ProjectService service) =>
     return project == null ? Results.NotFound() : Results.Ok(project);
 });
 
-app.MapPost("/projecten", async (ProjectDto dto, ProjectService service) =>
+app.MapPost("/projecten", async (ProjectCreateDto dto, ProjectService service) =>
 {
     var created = await service.Create(dto);
     return Results.Created($"/projecten/{created.Id}", created);
 });
 
-app.MapPut("/projecten/{id}", async (int id, ProjectDto dto, ProjectService service) =>
+app.MapPut("/projecten/{id}", async (int id, ProjectUpdateDto dto, ProjectService service) =>
 {
     var updated = await service.Update(id, dto);
     return updated == null ? Results.NotFound() : Results.Ok(updated);
