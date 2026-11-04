@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Opdracht3WPFW.Data;
-using Opdracht3WPFW.Models;
 using Opdracht3WPFW.DTOs;
+using Opdracht3WPFW.Models;
 
 namespace Opdracht3WPFW.Services;
 
@@ -17,30 +17,13 @@ public class BlogpostService
     public async Task<List<BlogpostResponseDto>> GetAll()
     {
         var blogposts = await _db.Blogposts.ToListAsync();
-
-        return blogposts.Select(b => new BlogpostResponseDto
-        {
-            Id = b.Id,
-            Titel = b.Titel,
-            Inhoud = b.Inhoud,
-            Publicatiedatum = b.Publicatiedatum
-        }).ToList();
+        return blogposts.Select(ToDto).ToList();
     }
 
     public async Task<BlogpostResponseDto?> GetById(int id)
     {
         var blogpost = await _db.Blogposts.FindAsync(id);
-
-        if (blogpost == null)
-            return null;
-
-        return new BlogpostResponseDto
-        {
-            Id = blogpost.Id,
-            Titel = blogpost.Titel,
-            Inhoud = blogpost.Inhoud,
-            Publicatiedatum = blogpost.Publicatiedatum
-        };
+        return blogpost == null ? null : ToDto(blogpost);
     }
 
     public async Task<BlogpostResponseDto> Create(BlogpostCreateDto dto)
@@ -55,7 +38,7 @@ public class BlogpostService
         _db.Blogposts.Add(blogpost);
         await _db.SaveChangesAsync();
 
-        return await GetById(blogpost.Id) ?? throw new Exception("Blogpost niet gevonden.");
+        return ToDto(blogpost);
     }
 
     public async Task<BlogpostResponseDto?> Update(int id, BlogpostUpdateDto dto)
@@ -71,7 +54,7 @@ public class BlogpostService
 
         await _db.SaveChangesAsync();
 
-        return await GetById(id);
+        return ToDto(blogpost);
     }
 
     public async Task<bool> Delete(int id)
@@ -86,4 +69,13 @@ public class BlogpostService
 
         return true;
     }
+
+    // Enige plek waar een Blogpost-entiteit naar een DTO wordt omgezet
+    private static BlogpostResponseDto ToDto(Blogpost b) => new()
+    {
+        Id = b.Id,
+        Titel = b.Titel,
+        Inhoud = b.Inhoud,
+        Publicatiedatum = b.Publicatiedatum
+    };
 }
