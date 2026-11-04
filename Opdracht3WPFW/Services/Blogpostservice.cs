@@ -70,7 +70,7 @@ public class BlogpostService
         return true;
     }
 
-    // Enige plek waar een Blogpost-entiteit naar een DTO wordt omgezet
+    //enige plek waar een Blogpost-entiteit naar een DTO wordt omgezet
     private static BlogpostResponseDto ToDto(Blogpost b) => new()
     {
         Id = b.Id,
