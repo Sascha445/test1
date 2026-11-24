@@ -8,6 +8,7 @@ namespace Opdracht3WPFW.Services;
 public class ProjectService
 {
     private readonly AppDbContext _db;
+    private readonly string GeheimeString; 
 
     public ProjectService(AppDbContext db)
     {
@@ -74,7 +75,7 @@ public class ProjectService
         return true;
     }
 
-    // Enige plek waar een Project-entiteit naar een DTO wordt omgezet
+    //enige plek waar een Project-entiteit naar een DTO wordt omgezet
     private static ProjectResponseDto ToDto(Project p) => new()
     {
         Id = p.Id,
